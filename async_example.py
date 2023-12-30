@@ -1,6 +1,6 @@
 import asyncio
 from async_client import FedimintClient
-from models.modules.ln import LnInvoiceRequest, AwaitInvoiceRequest
+from models.ln import LnInvoiceRequest, AwaitInvoiceRequest
 import os
 
 async def main():
@@ -13,14 +13,14 @@ async def main():
         print("Current Total Msats Ecash: ", response['total_amount_msat'])
 
         invoice_request = LnInvoiceRequest(amount_msat=10000, description='test', expiry_time=3600)
-        invoice_response = await fedimint_client.modules.ln.create_invoice(invoice_request)
+        invoice_response = await fedimint_client.ln.create_invoice(invoice_request)
 
         print("Created 10 sat Invoice: ", invoice_response['invoice'])
 
         print("Waiting for payment...")
 
         await_invoice_request = AwaitInvoiceRequest(operation_id=invoice_response['operation_id'])
-        payment_response = await fedimint_client.modules.ln.await_invoice(await_invoice_request)
+        payment_response = await fedimint_client.ln.await_invoice(await_invoice_request)
 
         print("Payment Received!")
         print("New Total Msats Ecash: ", payment_response['total_amount_msat'])
