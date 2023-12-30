@@ -1,4 +1,4 @@
-# fedimint-ts-client
+# Fedimint SDK in Python
 
 This is a Python client that consumes the Fedimint Http Client (https://github.com/kodylow/fedimint-http-client)[https://github.com/kodylow/fedimint-http-client], communicating with it via HTTP and a password. It's a hacky prototype, but it works until we can get a proper Python client for Fedimint. All of the federation handling code happens in the fedimint-http-client, this just exposes a simple API for interacting with the client from Python (will be mirrored in TS and Go).
 
