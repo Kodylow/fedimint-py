@@ -1,11 +1,12 @@
-from client import FedimintClient
+from FedimintClient import FedimintClient
 from models.ln import LnInvoiceRequest, AwaitInvoiceRequest
 import os
 
 base_url = os.getenv('BASE_URL', 'http://localhost:5000')
 password = os.getenv('PASSWORD', 'password')
+active_federation_id = os.getenv('ACTIVE_FEDERATION_ID', 'some-active-federation-id')
 
-fedimint_client = FedimintClient(base_url, password)
+fedimint_client = FedimintClient(base_url, password, active_federation_id)
 
 response = fedimint_client.info()
 print("Current Total Msats Ecash: ", response['total_amount_msat'])

@@ -1,13 +1,15 @@
 import asyncio
-from async_client import FedimintClient
+from AsyncFedimintClient import AsyncFedimintClient
 from models.ln import LnInvoiceRequest, AwaitInvoiceRequest
 import os
 
 async def main():
-    base_url = os.getenv('BASE_URL', 'http://localhost:5000')
+    base_url = os.getenv('BASE_URL', 'http://localhost:3333')
     password = os.getenv('PASSWORD', 'password')
-
-    fedimint_client = FedimintClient(base_url, password)
+    active_federation_id = os.getenv('ACTIVE_FEDERATION_ID', 'some-active-federation-id')
+    
+    fedimint_client = AsyncFedimintClient(base_url, password, active_federation_id)
+    
     try:
         response = await fedimint_client.info()
         print("Current Total Msats Ecash: ", response['total_amount_msat'])
